@@ -1,0 +1,16 @@
+{
+  "name": "cards-backend",
+  "version": "1.0.0",
+  "description": "backend of cards against humanity app",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Dany Vicente",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.5.2"
+  }
+}
