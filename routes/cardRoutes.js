@@ -9,6 +9,13 @@ const router = express.Router()
 
 router.route("/black")
     .get(cardController.getAllBlackCards)
+    .post(cardController.createBlackCard)
+
+
+router.route("/black/:id")
+    .get(cardController.getBlackCard)
+    .patch(cardController.updateBlackCard)
+    .delete(cardController.deleteBlackCard)
 
 
 
