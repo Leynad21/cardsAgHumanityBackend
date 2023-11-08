@@ -79,8 +79,7 @@ exports.updateBlackCard = catchAsync(async (req, res, next) => {
 //@route   api/v1/cards/black/:id
 //@access  private
 exports.deleteBlackCard = catchAsync(async (req, res, next) => {
-    const blackCard = await BlackCard.findByIdAndDelete(req.params.id)
-
+    await BlackCard.findByIdAndDelete(req.params.id)
 
     res.status(204).json({
         status: 'success',
@@ -90,6 +89,9 @@ exports.deleteBlackCard = catchAsync(async (req, res, next) => {
 
 // White Cards Controller
 
+//@desc    get all white cards
+//@route   api/v1/cards/white
+//@access  private
 exports.getAllWhiteCards = (req, res, next) => {
 
     next()
