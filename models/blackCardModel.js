@@ -10,6 +10,15 @@ const blackCardSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: [true, 'A black card must have a user'],
+    },
 });
 
 const BlackCard = mongoose.model('BlackCard', blackCardSchema);

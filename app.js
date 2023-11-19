@@ -1,6 +1,6 @@
 const express = require('express')
 const morgan = require('morgan')
-// const cors = require('cors')
+const cors = require('cors')
 const path = require('path')
 const passport = require('passport')
 
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Must first load the models
-require('./models/user');
+require('./models/userModel');
 
 // Pass the global passport object into the configuration function
 require('./config/passport')(passport);
@@ -36,13 +36,19 @@ app.use(express.json({
 }))
 
 // Allows our Frontend application to make HTTP requests to Express application
-// app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // enable cookies and credentials
+};
+
+app.use(cors(corsOptions));
 
 
 // 2) ROUTES
 
 app.use('/api/v1/cards', cardRouter)
-app.use('/api/v1/user', userRouter);
+app.use('/api/v1/users', userRouter);
 
 
 app.get("/", (req, res) => {

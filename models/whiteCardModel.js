@@ -6,6 +6,15 @@ const whiteCardSchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
 });
 
 const WhiteCard = mongoose.model('WhiteCard', whiteCardSchema)
