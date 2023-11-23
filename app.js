@@ -3,13 +3,18 @@ const morgan = require('morgan')
 const cors = require('cors')
 const path = require('path')
 const passport = require('passport')
+const dotenv = require('dotenv');
+
 
 
 const globalErrorHandler = require("./middleware/errorMiddleware")
 const cardRouter = require('./routes/cardRoutes')
 const userRouter = require('./routes/userRoutes')
+const chatRouter = require('./routes/chatRoutes')
+const messageRouter = require('./routes/messageRoutes')
 
-
+// Load env vars
+dotenv.config();
 
 const app = express()
 
@@ -31,17 +36,15 @@ require('./config/passport')(passport);
 app.use(passport.initialize());
 
 // Body parser, reading data from the body into req.body
-app.use(express.json({
-    limit: '10kb'
-}))
+app.use(express.json())
 
+// Enable CORS
 // Allows our Frontend application to make HTTP requests to Express application
 const corsOptions = {
     origin: 'http://localhost:5173',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true, // enable cookies and credentials
 };
-
 app.use(cors(corsOptions));
 
 
@@ -49,6 +52,8 @@ app.use(cors(corsOptions));
 
 app.use('/api/v1/cards', cardRouter)
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/chat', chatRouter);
+app.use('/api/v1/messages', messageRouter);
 
 
 app.get("/", (req, res) => {
